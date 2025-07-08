@@ -14,7 +14,6 @@
     </properties>
 
     <dependencies>
-
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
@@ -29,7 +28,7 @@
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>3.1.0</version>
                 <configuration>
-                    <mainClass>com.yourname.staffmanager.Main</mainClass>
+                    <mainClass>io.github.rubywha2.onboarding.Main</mainClass>
                 </configuration>
             </plugin>
         </plugins>
