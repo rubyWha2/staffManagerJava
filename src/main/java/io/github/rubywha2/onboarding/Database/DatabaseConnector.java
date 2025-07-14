@@ -1,4 +1,4 @@
-package io.github.rubywha2.onboarding;
+package io.github.rubywha2.onboarding.Database;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -9,7 +9,7 @@ public class DatabaseConnector {
     private static final String USER = "ruby";
     private static final String PASSWORD = "happy";
 
-    public static Connection connect() throws SQLException {
+    public static Connection getConnection()  throws SQLException {
         return DriverManager.getConnection(URL, USER, PASSWORD);
     }
 }
