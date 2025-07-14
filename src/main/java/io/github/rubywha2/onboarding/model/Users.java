@@ -1,4 +1,4 @@
-package io.github.rubywha2.onboarding;
+package io.github.rubywha2.onboarding.model;
 
 public class Users
 {

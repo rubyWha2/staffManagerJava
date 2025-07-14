@@ -1,6 +1,6 @@
-package io.github.rubywha2.onboarding;
+package io.github.rubywha2.onboarding.model;
 import java.time.LocalDateTime; // Import the LocalDateTime class
-import java.time.format.DateTimeFormatter; // Import the DateTimeFormatter class
+
 
 public class Log {
     private String user;
