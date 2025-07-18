@@ -6,12 +6,11 @@ public class Users
     private String password;
     private String role;
 
-    public Users() {}
-
-    public Users(int id, String username, String passwordHash) {
+    public Users(String role, String username, String passwordHash) {
         this.role = role;
         this.username = username;
         this.password = passwordHash;
+
     }
     public String getRole(){return role;}
     public void setRole(String role){this.role = role;}
