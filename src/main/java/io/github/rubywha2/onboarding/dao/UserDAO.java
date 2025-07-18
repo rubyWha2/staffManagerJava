@@ -8,7 +8,7 @@ import java.sql.*;
 public class UserDAO {
 
     public Users getUserByUsername(String username) {
-        String query = "SELECT Role, Username, Password FROM LoginCredentials WHERE username = ?";
+        String query = "SELECT Role, Username, Password FROM LogInCredentials WHERE username = ?";
 
         try (Connection conn = DatabaseConnector.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
@@ -18,7 +18,7 @@ public class UserDAO {
 
             if (rs.next()) {
                 return new Users(
-                        rs.getInt("role"),
+                        rs.getString("role"),
                         rs.getString("username"),
                         rs.getString("password")
                 );

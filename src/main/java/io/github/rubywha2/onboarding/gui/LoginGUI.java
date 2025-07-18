@@ -1,8 +1,18 @@
 package io.github.rubywha2.onboarding.gui;
+import io.github.rubywha2.onboarding.service.LoginService;
+
 import javax.swing.*;
 
 public class LoginGUI {
-    public static void main(String[] args) {
+
+    private final LoginService loginService;
+
+    public LoginGUI(LoginService loginService) {
+        this.loginService = loginService;
+        createWindow(); // call method to build GUI
+    }
+
+    private void createWindow(){
         JFrame frame = new JFrame("Login");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(1100, 800);
@@ -31,6 +41,20 @@ public class LoginGUI {
         JButton loginButton = new JButton("Login");
         loginButton.setBounds(10, 80, 80, 25);
         panel.add(loginButton);
+
+        loginButton.addActionListener(e -> {
+            String username = userText.getText();
+            String password = new String(passwordText.getPassword());
+            LoginService loginService = new LoginService();
+
+            if (loginService.validateLogin(username, password)) {
+                JOptionPane.showMessageDialog(frame, "Login successful!");
+                new HomepageGUI();
+                frame.dispose();
+            } else {
+                JOptionPane.showMessageDialog(frame, "Invalid username or password.");
+            }
+        });
 
     }
 }
