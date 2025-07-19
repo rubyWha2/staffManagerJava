@@ -3,16 +3,14 @@ import io.github.rubywha2.onboarding.service.LoginService;
 
 import javax.swing.*;
 
-public class LoginGUI {
-
-    private final LoginService loginService;
+public record LoginGUI(LoginService loginService) {
 
     public LoginGUI(LoginService loginService) {
         this.loginService = loginService;
         createWindow(); // call method to build GUI
     }
 
-    private void createWindow(){
+    private void createWindow() {
         JFrame frame = new JFrame("Login");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(1100, 800);
