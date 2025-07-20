@@ -36,7 +36,7 @@ public class HomepageGUI
         welcomeLabel.setBounds(30, 20, 400, 25);
         contentPanel.add(welcomeLabel);
 
-        JLabel DirectionsLabel = new JLabel("To edit staff personal details, press staff button. To edit and update training courses, press the training button. .");
+        JLabel DirectionsLabel = new JLabel("To edit staff personal details, press staff button. To edit and update training courses, press the training button.");
         DirectionsLabel.setBounds(30, 30, 900, 170);
         contentPanel.add(DirectionsLabel);
 
