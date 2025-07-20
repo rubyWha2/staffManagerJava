@@ -1,7 +1,12 @@
 package io.github.rubywha2.onboarding.gui;
+import io.github.rubywha2.onboarding.dao.StaffDAO;
+import io.github.rubywha2.onboarding.model.Staff;
+import javax.swing.table.DefaultTableModel;
+
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.List;
 
 public class StaffManagementGUI {
     public StaffManagementGUI() {
@@ -27,6 +32,44 @@ public class StaffManagementGUI {
         contentPanel.setLayout(null);
         contentPanel.setBounds(200, 0, 900, 800); // right of sidebar
         frame.add(contentPanel);
+
+        String[] columnNames = { "Firstname", "Lastname", "Email", "Postcode", "StaffID", "DBS Number", "RoleID" };
+        DefaultTableModel model = new DefaultTableModel(columnNames, 0);
+
+        StaffDAO dao = new StaffDAO();
+        List<Staff> staffList = dao.getStaffData();
+
+        for (Staff staff : staffList) {
+            Object[] row = {
+                    staff.getFirstname(),
+                    staff.getLastname(),
+                    staff.getEmail(),
+                    staff.getPostcode(),
+                    staff.getStaffID(),
+                    staff.getDBSnumber(),
+                    staff.getRoleID()
+            };
+            model.addRow(row);
+        }
+
+        JTable table = new JTable(model);
+
+        JScrollPane scrollPane = new JScrollPane(table);
+        scrollPane.setBounds(20, 20, 850, 300); // Proper size and location
+        contentPanel.add(scrollPane);
+
+        JButton saveButton = new JButton("Save");
+        saveButton.setBounds(20, 340, 120, 40);
+        contentPanel.add(saveButton);
+
+        JButton addButton = new JButton("Add Staff");
+        addButton.setBounds(140, 340, 120, 40);
+        contentPanel.add(addButton);
+
+        JButton deleteButton = new JButton("Delete Staff");
+        deleteButton.setBounds(260, 340, 120, 40);
+        contentPanel.add(deleteButton);
+
 
         JButton backButton = new JButton("Back");
         backButton.setBounds(10, 10, 120, 40);

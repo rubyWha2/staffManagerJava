@@ -9,7 +9,7 @@ public class Staff {
     private int DBSnumber;
     private String RoleID;
 
-    Staff(String firstname, String lastname, String email, String postcode, String StaffID,int DBSnumber, String RoleID) {
+    public Staff(String firstname, String lastname, String email, String postcode, String StaffID, int DBSnumber, String RoleID) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.email = email;
