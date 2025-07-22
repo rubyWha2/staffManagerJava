@@ -75,6 +75,33 @@ public class StaffManagementGUI {
         backButton.setBounds(10, 10, 120, 40);
         sidebar.add(backButton);
 
+        saveButton.addActionListener(e -> {
+            int selectedRow = table.getSelectedRow(); //gets staff member
+            if (selectedRow == -1) {
+                JOptionPane.showMessageDialog(frame, "Please select a row to save changes.");
+                return;
+            }
+
+            String firstname = model.getValueAt(selectedRow, 0).toString();
+            String lastname = model.getValueAt(selectedRow, 1).toString();
+            String email = model.getValueAt(selectedRow, 2).toString();
+            String postcode = model.getValueAt(selectedRow, 3).toString();
+            String staffID = model.getValueAt(selectedRow, 4).toString();
+            int dbsNumber = Integer.parseInt(model.getValueAt(selectedRow, 5).toString());
+            String roleID = model.getValueAt(selectedRow, 6).toString();
+
+            Staff UpdatedStaff = new Staff(firstname, lastname, email, postcode, staffID, dbsNumber, roleID);
+
+            boolean UpdatedStaffQuery = dao.SaveStaff(UpdatedStaff);
+
+            if (UpdatedStaffQuery=true) {
+                JOptionPane.showMessageDialog(frame, "Staff updated successfully.");
+            }
+            else {
+                JOptionPane.showMessageDialog(frame, "Staff update failed.");
+            }
+        });
+
         backButton.addActionListener(e -> {
             new HomepageGUI();
             frame.dispose(); // close current frame

@@ -39,4 +39,29 @@ public class StaffDAO {
 
         return staffList;
     }
+
+
+    public Boolean SaveStaff(Staff updatedStaff) {
+        String query = "UPDATE Staff SET Firstname = ?, Lastname = ?, Email = ?, Postcode = ?, DBS_Number = ?, RoleID = ? WHERE StaffID = ?";
+
+        try (Connection conn = DatabaseConnector.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+
+            //sets 1st question mark into Firstname
+            stmt.setString(1, updatedStaff.getFirstname());
+            stmt.setString(2, updatedStaff.getLastname());
+            stmt.setString(3, updatedStaff.getEmail());
+            stmt.setString(4, updatedStaff.getPostcode());
+            stmt.setInt(5, updatedStaff.getDBSnumber());
+            stmt.setString(6, updatedStaff.getRoleID());
+            stmt.setString(7, updatedStaff.getStaffID());
+
+            return stmt.executeUpdate() > 0;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
 }
