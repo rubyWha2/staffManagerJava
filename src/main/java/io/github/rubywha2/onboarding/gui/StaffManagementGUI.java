@@ -102,6 +102,23 @@ public class StaffManagementGUI {
             }
         });
 
+        deleteButton.addActionListener(e -> {
+            int selectedRow = table.getSelectedRow(); //gets staff member
+            if (selectedRow == -1) {
+                JOptionPane.showMessageDialog(frame, "Please select a row to save changes.");
+                return;
+            }
+
+            String staffID = model.getValueAt(selectedRow, 4).toString();
+            boolean DeleteStaffQuery = dao.DeleteStaff(staffID);
+
+            if (DeleteStaffQuery=true) {
+                JOptionPane.showMessageDialog(frame, "Staff updated successfully.");
+            }
+            else {
+                JOptionPane.showMessageDialog(frame, "Staff update failed.");
+            }
+        });
         backButton.addActionListener(e -> {
             new HomepageGUI();
             frame.dispose(); // close current frame

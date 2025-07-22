@@ -64,4 +64,21 @@ public class StaffDAO {
         }
     }
 
+    public Boolean DeleteStaff(String StaffID) {
+        String query = "DELETE FROM Staff WHERE StaffID = ?";
+
+        try (Connection conn = DatabaseConnector.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+
+            //sets StaffID to input ID
+            stmt.setString(1, StaffID);
+
+            return stmt.executeUpdate() > 0;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
 }
