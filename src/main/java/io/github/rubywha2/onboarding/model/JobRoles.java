@@ -1,20 +1,20 @@
 package io.github.rubywha2.onboarding.model;
 
 public class JobRoles {
-    private String JobRole;
+    private String RoleID;
     private double RateOfPay;
     private String Description;
 
-    public JobRoles(String JobRole, double RateOfPay, String Description) {
-        this.JobRole = JobRole;
+    public JobRoles(String RoleID, double RateOfPay, String Description) {
+        this.RoleID = RoleID;
         this.RateOfPay = RateOfPay;
         this.Description = Description;
     }
-    public String getJobRole() {
-        return JobRole;
+    public String getRoleID() {
+        return RoleID;
     }
-    public void setJobRole(String JobRole) {
-        this.JobRole = JobRole;
+    public void setRoleID(String RoleID) {
+        this.RoleID = RoleID;
     }
     public double getRateOfPay() {
         return RateOfPay;
