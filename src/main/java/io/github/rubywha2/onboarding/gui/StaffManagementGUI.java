@@ -102,6 +102,11 @@ public class StaffManagementGUI {
             }
         });
 
+
+        deleteButton.addActionListener(e -> {
+            showAddStaffDialog();
+        });
+
         deleteButton.addActionListener(e -> {
             int selectedRow = table.getSelectedRow(); //gets staff member
             if (selectedRow == -1) {
@@ -123,6 +128,59 @@ public class StaffManagementGUI {
             new HomepageGUI();
             frame.dispose(); // close current frame
         });
+    }
+
+    private void showAddStaffDialog() {
+        JTextField firstnameField = new JTextField();
+        JTextField lastnameField = new JTextField();
+        JTextField emailField = new JTextField();
+        JTextField postcodeField = new JTextField();
+        JTextField dbsField = new JTextField();
+        JTextField roleIdField = new JTextField();
+        JTextField staffIdField = new JTextField();
+
+        JPanel panel = new JPanel(new GridLayout(0, 1));
+        panel.add(new JLabel("Firstname:"));
+        panel.add(firstnameField);
+        panel.add(new JLabel("Lastname:"));
+        panel.add(lastnameField);
+        panel.add(new JLabel("Email:"));
+        panel.add(emailField);
+        panel.add(new JLabel("Postcode:"));
+        panel.add(postcodeField);
+        panel.add(new JLabel("DBS Number:"));
+        panel.add(dbsField);
+        panel.add(new JLabel("Role ID:"));
+        panel.add(roleIdField);
+        panel.add(new JLabel("Staff ID:"));
+        panel.add(staffIdField);
+
+        int result = JOptionPane.showConfirmDialog(null, panel, "Add New Staff", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+
+        if (result == JOptionPane.OK_OPTION) {
+            try {
+                Staff newStaff = new Staff(
+                        firstnameField.getText(),
+                        lastnameField.getText(),
+                        emailField.getText(),
+                        postcodeField.getText(),
+                        staffIdField.getText(),
+                        Integer.parseInt(dbsField.getText()),
+                        roleIdField.getText()
+                );
+
+                StaffDAO dao = new StaffDAO();
+                boolean added = dao.AddNewStaff(newStaff);
+                if (added) {
+                    JOptionPane.showMessageDialog(null, "New staff added successfully!");
+                    // Optionally refresh the table here
+                } else {
+                    JOptionPane.showMessageDialog(null, "Failed to add staff.");
+                }
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(null, "Invalid DBS number.");
+            }
+        }
     }
 }
 
