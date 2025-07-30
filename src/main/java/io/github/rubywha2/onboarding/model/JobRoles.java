@@ -2,10 +2,10 @@ package io.github.rubywha2.onboarding.model;
 
 public class JobRoles {
     private String JobRole;
-    private String RateOfPay;
+    private double RateOfPay;
     private String Description;
 
-    JobRoles(String JobRole, String RateOfPay, String Description) {
+    public JobRoles(String JobRole, double RateOfPay, String Description) {
         this.JobRole = JobRole;
         this.RateOfPay = RateOfPay;
         this.Description = Description;
@@ -16,10 +16,10 @@ public class JobRoles {
     public void setJobRole(String JobRole) {
         this.JobRole = JobRole;
     }
-    public String getRateOfPay() {
+    public double getRateOfPay() {
         return RateOfPay;
     }
-    public void setRateOfPay(String RateOfPay) {
+    public void setRateOfPay(double RateOfPay) {
         this.RateOfPay = RateOfPay;
     }
     public String getDescription() {
