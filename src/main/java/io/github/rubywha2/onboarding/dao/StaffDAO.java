@@ -81,4 +81,27 @@ public class StaffDAO {
         }
     }
 
+    public Boolean AddNewStaff(Staff newStaff) {
+        String query = "INSERT INTO Staff VALUES (?, ?, ?,?,?,?,?)";
+
+        try (Connection conn = DatabaseConnector.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+
+            //sets 1st question mark into Firstname
+            stmt.setString(1, newStaff.getFirstname());
+            stmt.setString(2, newStaff.getLastname());
+            stmt.setString(3, newStaff.getEmail());
+            stmt.setString(4, newStaff.getPostcode());
+            stmt.setInt(5, newStaff.getDBSnumber());
+            stmt.setString(6, newStaff.getRoleID());
+            stmt.setString(7, newStaff.getStaffID());
+
+            return stmt.executeUpdate() > 0;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
 }
