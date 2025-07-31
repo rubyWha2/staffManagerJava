@@ -4,9 +4,9 @@ public class Training {
     private String trainingCourseName;
     private String trainingDescription;
     private String trainingProvider;
-    private String trainingID;
+    private int trainingID;
 
-    Training(String trainingCourseName, String trainingDescription, String trainingProvider, String trainingID) {
+    public Training(String trainingCourseName, String trainingDescription, String trainingProvider, int trainingID) {
         this.trainingCourseName = trainingCourseName;
         this.trainingDescription = trainingDescription;
         this.trainingProvider = trainingProvider;
@@ -31,10 +31,10 @@ public class Training {
     public void setTrainingProvider(String trainingProvider){
         this.trainingProvider = trainingProvider;
     }
-    public String getTrainingID(){
+    public int getTrainingID(){
         return trainingID;
     }
-    public void setTrainingID(String trainingID){
+    public void setTrainingID(int trainingID){
         this.trainingID = trainingID;
     }
 
