@@ -2,13 +2,13 @@ package io.github.rubywha2.onboarding.model;
 
 public class StaffTraining {
     private String StaffID;
-    private String TrainingID;
-    private String TrainingName;
+    private int TrainingID;
+    private String Status;
 
-    StaffTraining(String StaffID, String TrainingID, String TrainingName) {
+    public StaffTraining(String StaffID, int TrainingID, String Status) {
         this.StaffID = StaffID;
         this.TrainingID = TrainingID;
-        this.TrainingName = TrainingName;
+        this.Status = Status;
     }
     public String getStaffID() {
         return StaffID;
@@ -16,17 +16,17 @@ public class StaffTraining {
     public void setStaffID(String StaffID) {
         this.StaffID = StaffID;
     }
-    public String getTrainingID() {
+    public int getTrainingID() {
         return TrainingID;
     }
-    public void setTrainingID(String TrainingID) {
+    public void setTrainingID(int TrainingID) {
         this.TrainingID = TrainingID;
     }
-    public String getTrainingName() {
-        return TrainingName;
+    public String getStatus() {
+        return Status;
     }
-    public void setTrainingName(String TrainingName) {
-        this.TrainingName = TrainingName;
+    public void setStatus(String TrainingName) {
+        this.Status = Status;
     }
 
 }
