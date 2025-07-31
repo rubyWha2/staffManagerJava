@@ -82,7 +82,7 @@ public class StaffDAO {
     }
 
     public Boolean AddNewStaff(Staff newStaff) {
-        String query = "INSERT INTO Staff VALUES (?, ?, ?,?,?,?,?)";
+        String query = "INSERT INTO Staff (Firstname, Lastname, Email, Postcode, DBS_Number, RoleID, StaffID) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = DatabaseConnector.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
@@ -95,6 +95,15 @@ public class StaffDAO {
             stmt.setInt(5, newStaff.getDBSnumber());
             stmt.setString(6, newStaff.getRoleID());
             stmt.setString(7, newStaff.getStaffID());
+
+            System.out.println("Adding staff:");
+            System.out.println("Firstname: " + newStaff.getFirstname());
+            System.out.println("Lastname: " + newStaff.getLastname());
+            System.out.println("Email: " + newStaff.getEmail());
+            System.out.println("Postcode: " + newStaff.getPostcode());
+            System.out.println("DBS Number: " + newStaff.getDBSnumber());
+            System.out.println("Role ID: " + newStaff.getRoleID());
+            System.out.println("Staff ID: " + newStaff.getStaffID());
 
             return stmt.executeUpdate() > 0;
 

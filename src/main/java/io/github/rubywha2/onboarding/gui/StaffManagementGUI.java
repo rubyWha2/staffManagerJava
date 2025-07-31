@@ -33,6 +33,7 @@ public class StaffManagementGUI {
         contentPanel.setBounds(200, 0, 900, 800); // right of sidebar
         frame.add(contentPanel);
 
+        //Setting Up Column headers JTable
         String[] columnNames = { "Firstname", "Lastname", "Email", "Postcode", "StaffID", "DBS Number", "RoleID" };
         DefaultTableModel model = new DefaultTableModel(columnNames, 0);
 
@@ -94,7 +95,7 @@ public class StaffManagementGUI {
 
             boolean UpdatedStaffQuery = dao.SaveStaff(UpdatedStaff);
 
-            if (UpdatedStaffQuery=true) {
+            if (UpdatedStaffQuery) {
                 JOptionPane.showMessageDialog(frame, "Staff updated successfully.");
             }
             else {
@@ -103,7 +104,7 @@ public class StaffManagementGUI {
         });
 
 
-        deleteButton.addActionListener(e -> {
+        addButton.addActionListener(e -> {
             showAddStaffDialog();
         });
 
@@ -117,7 +118,7 @@ public class StaffManagementGUI {
             String staffID = model.getValueAt(selectedRow, 4).toString();
             boolean DeleteStaffQuery = dao.DeleteStaff(staffID);
 
-            if (DeleteStaffQuery=true) {
+            if (DeleteStaffQuery) {
                 JOptionPane.showMessageDialog(frame, "Staff updated successfully.");
             }
             else {
@@ -181,6 +182,8 @@ public class StaffManagementGUI {
                 JOptionPane.showMessageDialog(null, "Invalid DBS number.");
             }
         }
+
+
     }
 }
 
