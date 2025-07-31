@@ -36,7 +36,7 @@ public class JobRoleDAO {
 
         return jobRolesList;
     }
-    public Boolean SaveJobRole(JobRoles updatedRole) {
+    public Boolean SaveJobRole(JobRoles updatedRole, String originalRoleID) {
         String query = "UPDATE JobRoles SET RoleID = ?, RateOfPay = ?, Description = ? WHERE RoleID = ?";
 
         try (Connection conn = DatabaseConnector.getConnection();
@@ -46,6 +46,7 @@ public class JobRoleDAO {
             stmt.setString(1, updatedRole.getRoleID());
             stmt.setDouble(2, updatedRole.getRateOfPay());
             stmt.setString(3, updatedRole.getDescription());
+            stmt.setString(4, originalRoleID);
 
             return stmt.executeUpdate() > 0;
 
