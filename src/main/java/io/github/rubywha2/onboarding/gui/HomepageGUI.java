@@ -64,7 +64,7 @@ public class HomepageGUI
         trainingButton.setBounds(170, 150, 120, 40);
         contentPanel.add(trainingButton);
 
-        JButton jobPButton = new JButton("Job Profiles");
+        JButton jobPButton = new JButton("Job Fit");
         jobPButton.setBounds(310, 150, 140, 40);
         contentPanel.add(jobPButton);
 
