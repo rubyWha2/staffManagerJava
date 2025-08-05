@@ -3,11 +3,13 @@ package io.github.rubywha2.onboarding.gui;
 import io.github.rubywha2.onboarding.dao.JobFitDAO;
 import io.github.rubywha2.onboarding.dao.TrainingDAO;
 import io.github.rubywha2.onboarding.model.JobRoleTraining;
+import io.github.rubywha2.onboarding.model.StaffTraining;
 import io.github.rubywha2.onboarding.model.Training;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class JobFitGUI {
@@ -77,5 +79,81 @@ public class JobFitGUI {
 
         frame.setVisible(true);
 
+        JButton assignButton = new JButton("Check Staff Members Eligibility For New Job role");
+        assignButton.setBounds(20, 280, 700, 40);
+        contentPanel.add(assignButton);
+
+        assignButton.addActionListener(e -> {
+            showAssignJobRoleDialog();
+        });
+    }
+
+    private void showAssignJobRoleDialog() {
+        JobFitDAO dao = new JobFitDAO();
+
+        JComboBox<String> staffIDBox = new JComboBox<>();
+        JComboBox<String> roleIDBox = new JComboBox<>();
+
+        // Load staff IDs
+        List<String> staffIDs = dao.getAllStaffIDs();
+        for (String id : staffIDs) {
+            staffIDBox.addItem(id);
+        }
+
+        // Load job roles
+        List<String> roleIDs = dao.getAllJobRoles();
+        for (String id : roleIDs) {
+            roleIDBox.addItem(id);
+        }
+
+        // Layout panel
+        JPanel panel = new JPanel(new GridLayout(0, 1));
+        panel.add(new JLabel("Select Staff ID:"));
+        panel.add(staffIDBox);
+        panel.add(new JLabel("Select Role ID:"));
+        panel.add(roleIDBox);
+
+        int result = JOptionPane.showConfirmDialog(null, panel, "Check Training Match",
+                JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+
+        if (result == JOptionPane.OK_OPTION) {
+            String selectedStaffID = (String) staffIDBox.getSelectedItem();
+            String selectedRoleID = (String) roleIDBox.getSelectedItem();
+
+            if (selectedStaffID == null || selectedRoleID == null) {
+                JOptionPane.showMessageDialog(null, "Please select both Staff ID and Role ID.");
+                return;
+            }
+
+            // Load completed training
+            List<StaffTraining> staffTrainings = dao.getAllStaffsTrainings(selectedStaffID);
+            List<String> completedTrainings = new ArrayList<>();
+            for (StaffTraining t : staffTrainings) {
+                if ("Completed".equalsIgnoreCase(t.getStatus())) {
+                    completedTrainings.add(String.valueOf(t.getTrainingID()));
+                }
+            }
+
+            // Load required training
+            List<String> requiredTrainings = dao.getRequiredTrainingForRole(selectedRoleID);
+
+            // Check if staff has completed all required trainings
+            List<String> missingTrainings = new ArrayList<>();
+            for (String required : requiredTrainings) {
+                if (!completedTrainings.contains(required)) {
+                    missingTrainings.add(required);
+                }
+            }
+
+            if (missingTrainings.isEmpty()) {
+                JOptionPane.showMessageDialog(null,
+                        "Staff member IS fully trained for this role!",
+                        "Result", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null,
+                        "Staff member is MISSING training(s): " + String.join(", ", missingTrainings),
+                        "Result", JOptionPane.WARNING_MESSAGE);
+            }
+        }
     }
 }
