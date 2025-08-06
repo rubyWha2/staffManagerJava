@@ -4,10 +4,10 @@ import java.time.LocalDateTime; // Import the LocalDateTime class
 
 public class Log {
     private String user;
-    private LocalDateTime logInTime;
+    private String logInTime;
     private int attempts;
 
-    public Log(String user, LocalDateTime logInTime, int attempts) {
+    public Log(String user, String logInTime, int attempts) {
         this.user = user;
         this.logInTime = logInTime;
         this.attempts = attempts;
@@ -18,10 +18,10 @@ public class Log {
     public void setUser(String user) {
         this.user = user;
     }
-    public LocalDateTime getLogInTime() {
+    public String getLogInTime() {
         return logInTime;
     }
-    public void setLogInTime(LocalDateTime logInTime) {
+    public void setLogInTime(String logInTime) {
         this.logInTime = logInTime;
     }
     public int getAttempts() {
@@ -30,6 +30,17 @@ public class Log {
     public void setAttempts(int attempts) {
         this.attempts = attempts;
     }
+
+    @Override
+    public String toString() {
+        return "Log{" +
+                "username='" + user + '\'' +
+                ", date='" + logInTime + '\'' +
+                ", attempts=" + attempts +
+                '}';
+    }
+
+
 
 }
 
