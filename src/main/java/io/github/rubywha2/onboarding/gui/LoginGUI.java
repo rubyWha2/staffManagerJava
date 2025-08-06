@@ -1,6 +1,7 @@
 package io.github.rubywha2.onboarding.gui;
 import io.github.rubywha2.onboarding.service.LoginService;
-
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import javax.swing.*;
 
 public record LoginGUI(LoginService loginService) {
@@ -41,6 +42,11 @@ public record LoginGUI(LoginService loginService) {
         panel.add(loginButton);
 
         loginButton.addActionListener(e -> {
+            LocalDateTime now = LocalDateTime.now();
+            String formatted = now.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+
+            int attempts = 1;
+
             String username = userText.getText();
             String password = new String(passwordText.getPassword());
             LoginService loginService = new LoginService();
@@ -49,8 +55,11 @@ public record LoginGUI(LoginService loginService) {
                 JOptionPane.showMessageDialog(frame, "Login successful!");
                 new HomepageGUI();
                 frame.dispose();
-            } else {
+                loginService.recordLogin( username, formatted, attempts,"SuccessfulLogin");}
+            else {
                 JOptionPane.showMessageDialog(frame, "Invalid username or password.");
+                attempts++;
+                loginService.recordLogin( username, formatted, attempts,"FailedLogin");
             }
         });
 
