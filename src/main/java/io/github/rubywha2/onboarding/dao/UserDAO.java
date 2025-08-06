@@ -1,6 +1,8 @@
 package io.github.rubywha2.onboarding.dao;
 
 import io.github.rubywha2.onboarding.Database.DatabaseConnector;
+import io.github.rubywha2.onboarding.model.Log;
+import io.github.rubywha2.onboarding.model.Staff;
 import io.github.rubywha2.onboarding.model.Users;
 
 import java.sql.*;
@@ -29,5 +31,25 @@ public class UserDAO {
         }
 
         return null; // Not found
+    }
+
+    public Boolean recordNewLogin(Log newLog) {
+        String query = "INSERT INTO LoginLogs (User, Time, Attempts) VALUES (?, ?, ?)";
+
+        try (Connection conn = DatabaseConnector.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+
+            //sets 1st question mark into Firstname
+            stmt.setString(1, newLog.getUser());
+            stmt.setString(2, String.valueOf(newLog.getLogInTime()));
+            stmt.setInt(3, newLog.getAttempts());
+
+
+            return stmt.executeUpdate() > 0;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 }
