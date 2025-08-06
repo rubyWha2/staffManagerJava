@@ -1,9 +1,9 @@
 package io.github.rubywha2.onboarding.service;
-
 import io.github.rubywha2.onboarding.dao.UserDAO;
 import io.github.rubywha2.onboarding.model.Users;
+import io.github.rubywha2.onboarding.model.Log;
+import io.github.rubywha2.onboarding.util.CSVLogger;
 import org.mindrot.jbcrypt.BCrypt;
-
 public class LoginService {
     private final UserDAO userDAO = new UserDAO();
 
@@ -27,6 +27,15 @@ public class LoginService {
         System.out.println("✅ Password match result: " + result);
 
         return result;
+    }
+
+    public void recordLogin(String username, String date, int attempts, String status) {
+        Log newLog = new Log(username, date, attempts);
+        boolean recordLogIn = userDAO.recordNewLogin(newLog);
+        if (recordLogIn) {
+            CSVLogger.append(newLog, status);
+        }
+
     }
 
 }
