@@ -8,9 +8,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
 public class StaffDAO {
 
+    /**
+     * Retrieves all staff data from the database.
+     *
+     * @return a List of Staff objects representing all staff members.
+     */
     public List<Staff> getStaffData() {
         List<Staff> staffList = new ArrayList<>();
 
@@ -40,14 +44,19 @@ public class StaffDAO {
         return staffList;
     }
 
-
+    /**
+     * Updates an existing staff record in the database.
+     *
+     * @param updatedStaff the Staff object containing updated staff details.
+     * @return true if the update was successful, false otherwise.
+     */
     public Boolean SaveStaff(Staff updatedStaff) {
         String query = "UPDATE Staff SET Firstname = ?, Lastname = ?, Email = ?, Postcode = ?, DBS_Number = ?, RoleID = ? WHERE StaffID = ?";
 
         try (Connection conn = DatabaseConnector.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
 
-            //sets 1st question mark into Firstname
+            // Set parameters for the update query
             stmt.setString(1, updatedStaff.getFirstname());
             stmt.setString(2, updatedStaff.getLastname());
             stmt.setString(3, updatedStaff.getEmail());
@@ -64,13 +73,19 @@ public class StaffDAO {
         }
     }
 
+    /**
+     * Deletes a staff record from the database based on StaffID.
+     *
+     * @param StaffID the ID of the staff member to delete.
+     * @return true if the deletion was successful, false otherwise.
+     */
     public Boolean DeleteStaff(String StaffID) {
         String query = "DELETE FROM Staff WHERE StaffID = ?";
 
         try (Connection conn = DatabaseConnector.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
 
-            //sets StaffID to input ID
+            // Set StaffID parameter for deletion
             stmt.setString(1, StaffID);
 
             return stmt.executeUpdate() > 0;
@@ -81,13 +96,19 @@ public class StaffDAO {
         }
     }
 
+    /**
+     * Adds a new staff record to the database.
+     *
+     * @param newStaff the Staff object representing the new staff member to add.
+     * @return true if the insertion was successful, false otherwise.
+     */
     public Boolean AddNewStaff(Staff newStaff) {
         String query = "INSERT INTO Staff (Firstname, Lastname, Email, Postcode, DBS_Number, RoleID, StaffID) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = DatabaseConnector.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
 
-            //sets 1st question mark into Firstname
+            // Set parameters for the insert query
             stmt.setString(1, newStaff.getFirstname());
             stmt.setString(2, newStaff.getLastname());
             stmt.setString(3, newStaff.getEmail());
@@ -112,5 +133,4 @@ public class StaffDAO {
             return false;
         }
     }
-
 }
