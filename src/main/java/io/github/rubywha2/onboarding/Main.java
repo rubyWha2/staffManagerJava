@@ -1,5 +1,4 @@
 package io.github.rubywha2.onboarding;
-
 import io.github.rubywha2.onboarding.gui.LoginGUI;
 import io.github.rubywha2.onboarding.service.LoginService;
 import io.github.rubywha2.onboarding.util.CSVLogger;
