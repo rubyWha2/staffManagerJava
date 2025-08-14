@@ -7,7 +7,11 @@ import org.mindrot.jbcrypt.BCrypt;
 public class LoginService {
 
     // Data Access Object for user-related database operations
-    private final UserDAO userDAO = new UserDAO();
+    private UserDAO userDAO = new UserDAO();
+
+    public LoginService() {
+        this.userDAO = userDAO;
+    }
 
     /**
      * Validates user login by checking if the username exists and
@@ -57,5 +61,4 @@ public class LoginService {
             CSVLogger.append(newLog, status);
         }
     }
-
 }
