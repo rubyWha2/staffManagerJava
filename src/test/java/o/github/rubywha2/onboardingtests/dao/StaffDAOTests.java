@@ -23,7 +23,7 @@ public class StaffDAOTests {
     void testGetAllStaffIDs() {
         List<Staff> staffList = dao.getStaffData();
         assertTrue(staffList.size() > 11, "Expected at least 6 staff members in the database");
-        staffList.forEach(role -> System.out.println(role.getStaffID()));
+        staffList.forEach(staff -> System.out.println(staff.getStaffID()));
     }
 
     @Test
