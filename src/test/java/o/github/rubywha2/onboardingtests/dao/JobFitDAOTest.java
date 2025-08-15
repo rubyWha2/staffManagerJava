@@ -6,7 +6,6 @@ import io.github.rubywha2.onboarding.model.StaffTraining;
 import org.junit.jupiter.api.*;
 import java.sql.*;
 import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 public class JobFitDAOTest {
