@@ -39,6 +39,13 @@ public class JobRoles {
     }
 
     /**
+     * Sets the rate of pay for the role.
+     */
+    public void setRateOfPay(double rateOfPay) {
+        this.RateOfPay = RateOfPay;
+    }
+
+    /**
      * Gets the description of the job role.
      * @return the Description
      */
