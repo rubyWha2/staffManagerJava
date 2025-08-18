@@ -10,14 +10,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class JobFitGUI {
+    private JFrame frame;
+    private JTable table;
+
     // Constructor - starts GUI creation
     public JobFitGUI() {
+        frame = new JFrame("Job Profile Page"); // initialize frame
         createWindow(); // build GUI window
     }
 
     // Build and display main window
     private void createWindow() {
-        JFrame frame = new JFrame("Job Profile Page");
+
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(1100, 800);
         frame.setLayout(null); // manual layout for control
@@ -40,13 +44,10 @@ public class JobFitGUI {
         welcomeLabel.setBounds(20, 20, 400, 25);
         contentPanel.add(welcomeLabel);
 
-        // Instructions label (currently same text, could be customized)
-        JLabel instructionsLabel = new JLabel("Welcome to the Job Fit Page");
-        instructionsLabel.setBounds(20, 20, 400, 25);
-        contentPanel.add(instructionsLabel);
 
         // Back button in sidebar
         JButton backButton = new JButton("Back");
+        backButton.setName("Back");
         backButton.setBounds(10, 20, 100, 30);
         sidebar.add(backButton);
 
@@ -67,8 +68,8 @@ public class JobFitGUI {
             model.addRow(row);
         }
 
-        // Create table and add to scroll pane
-        JTable table = new JTable(model);
+        // Initialises table and creates add to scroll pane
+        table = new JTable(model);
         JScrollPane scrollPane = new JScrollPane(table);
         scrollPane.setBounds(20, 40, 850, 200); // position and size
         contentPanel.add(scrollPane);
@@ -83,6 +84,7 @@ public class JobFitGUI {
 
         // Button to check staff eligibility for new job role
         JButton assignButton = new JButton("Check Staff Members Eligibility For New Job role");
+        assignButton.setName("Assign");
         assignButton.setBounds(20, 280, 700, 40);
         contentPanel.add(assignButton);
 
@@ -165,4 +167,14 @@ public class JobFitGUI {
             }
         }
     }
+
+    // ===== Getters for testing =====
+    public JFrame getFrame() {
+        return frame;
+    }
+
+    public JTable getTable() {
+        return table;
+    }
+
 }
