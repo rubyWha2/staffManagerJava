@@ -58,13 +58,40 @@ This project is a secure, Java-based desktop application used for onboarding and
 
 The schema consists of several main entities:
 
+The primary keys are in bold on the diagram above, the lines connecting tables represent foreign keys.
+
 * **Staff**: stores staff details and their assigned role.
+  * Firstname varchar(100)
+  * Lastname varchar(100)
+  * Email varchar(100)
+  * Postcode varchar(100)
+  * StaffID varchar(100)
+  * DBS Number Int
+  * RoleID varchar(100)
 * **Training**: holds available training courses.
+  * Training_Course_Name varchar(255)
+  * Training_Description varchar(255)
+  * Training_Provider varchar(100)
+  * TrainingID Int
 * **Staff\_Training**: join table mapping which staff have completed which training and their status.
+  * StaffID varchar(100)
+  * TrainingID int
+  * Status varchar(100)
 * **JobRoles**: defines job roles and their requirements.
+  * RoleID varchar(100)
+  * RateOfPay double
+  * Description varchar(100)
 * **JobRoleTraining**: join table mapping which trainings are required for which roles.
+  * RoleID varchar(100)
+  * TrainingID int
 * **LogInCredentials**: stores usernames, passwords, and roles for authentication.
+  * Username varchar(100)
+  * Password varchar(240)
+  * Role varchar(100)
 * **LoginLogs**: records login attempts with timestamps and outcomes.
+  * User varchar(100)
+  * Time varchar(100)
+  * Attempts varchar(100)
 
 ## How to Use And Database Setup
 
